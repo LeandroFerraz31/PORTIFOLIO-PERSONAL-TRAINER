@@ -163,13 +163,13 @@
         // DADOS PARA FÁCIL EDIÇÃO
         // ===============================
         const portfolioData = {
-            name: "Eduardo Silva",
+            name: "fulano de tal",
             title: "Personal Trainer e Especialista em Performance Física",
             quote: "Disciplina supera talento quando o talento não se disciplina.",
             phone: "(11) 99999-9999",
-            email: "contato@eduardosilva.com",
-            instagram: "@personal__eduardosilva",
-            location: "São Paulo, SP"
+            email: "contato@fulanodetal.com",
+            instagram: "@personal__fulanodetal",
+            location: "Estrela RS"
         };
         
         // Função para atualizar dados do portfólio
