@@ -431,16 +431,12 @@
             document.querySelectorAll('input[name="equip"], input[name="level"]').forEach(input => {
                 input.addEventListener('change', async () => {
                     await updatePreview();
-                    if (!result.hidden) {
-                        await generateAndRenderPlan();
-                    }
+                    // Não atualiza o plano automaticamente - só quando clicar em "Atualizar plano"
                 });
             });
             document.querySelectorAll('input[name="goal"]').forEach(input => {
                 input.addEventListener('change', async () => {
-                    if (!result.hidden) {
-                        await generateAndRenderPlan();
-                    }
+                    // Não atualiza o plano automaticamente - só quando clicar em "Atualizar plano"
                 });
             });
             // Carregar prévia inicial quando abrir
