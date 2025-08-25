@@ -84,13 +84,41 @@
         // ===============================
         function handleContactForm() {
             const form = document.querySelector('.contact-form form');
-            
+            if (!form) return;
+
+            // Não intercepta se houver action (uso de serviço externo)
+            if (form.getAttribute('action')) {
+                form.addEventListener('submit', () => {
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Enviando...';
+                    }
+
+                    // Se marcado, abrir conversa no WhatsApp com a mesma mensagem
+                    const sendWhats = document.getElementById('sendWhatsApp');
+                    if (sendWhats && sendWhats.checked) {
+                        const name = (document.getElementById('name')?.value || '').trim();
+                        const email = (document.getElementById('email')?.value || '').trim();
+                        const phone = (document.getElementById('phone')?.value || '').trim();
+                        const message = (document.getElementById('message')?.value || '').trim();
+                        const parts = [];
+                        if (name) parts.push(`Nome: ${name}`);
+                        if (email) parts.push(`Email: ${email}`);
+                        if (phone) parts.push(`Telefone: ${phone}`);
+                        if (message) parts.push(`Mensagem: ${message}`);
+                        const text = encodeURIComponent(parts.join('\n'));
+                        const whatsappNumber = '5551983012611'; // mesmo número do botão flutuante
+                        const waUrl = `https://wa.me/${whatsappNumber}?text=${text}`;
+                        // Abre em nova guia para não interromper a submissão do formulário
+                        window.open(waUrl, '_blank', 'noopener');
+                    }
+                });
+                return;
+            }
+
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                
-                // Aqui você pode adicionar a lógica para enviar o formulário
-                // Por exemplo, integração com um serviço de email
-                
                 alert('Mensagem enviada com sucesso! Entrarei em contato em breve.');
                 form.reset();
             });

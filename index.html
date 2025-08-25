@@ -494,24 +494,34 @@
                 </div>
                 <div class="contact-form animate-on-scroll">
                     <h3>Envie uma Mensagem</h3>
-                    <form>
+                    <form action="https://formsubmit.co/leandro.santos@universo.univates.br" method="POST" target="_blank">
+                        <input type="hidden" name="_captcha" value="false" />
+                        <input type="hidden" name="_template" value="box" />
+                        <input type="hidden" name="_subject" value="Novo contato do site - Personal Trainer" />
+                        <input type="hidden" name="_next" value="/#contact?success=1" />
                         <div class="form-group">
                             <label for="name">Nome</label>
-                            <input id="name" name="name" required="" type="text" />
+                            <input id="name" name="name" required="" type="text" autocomplete="name" />
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input id="email" name="email" required="" type="email" />
+                            <input id="email" name="email" required="" type="email" autocomplete="email" />
                         </div>
                         <div class="form-group">
                             <label for="phone">Telefone</label>
-                            <input id="phone" name="phone" type="tel" />
+                            <input id="phone" name="phone" type="tel" autocomplete="tel" />
                         </div>
                         <div class="form-group">
                             <label for="message">Mensagem</label>
                             <textarea id="message" name="message"
                                 placeholder="Conte-me sobre seus objetivos e como posso ajudar..."
                                 required=""></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input id="sendWhatsApp" type="checkbox" checked />
+                                Enviar esta mensagem também para meu WhatsApp (abrirá uma conversa)
+                            </label>
                         </div>
                         <button class="btn btn-primary" type="submit">Enviar Mensagem</button>
                     </form>
@@ -533,7 +543,7 @@
                         <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer">
+                        <a href="https://wa.me/5551983012611" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                         <a href="mailto:contato@fulanodetal.com">
@@ -578,7 +588,7 @@
          JAVASCRIPT
          =============================== -->
     <!-- Botão flutuante WhatsApp -->
-    <a aria-label="WhatsApp" class="whatsapp-float" href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer">
+    <a aria-label="WhatsApp" class="whatsapp-float" href="https://wa.me/5551983012611" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-whatsapp"></i>
     </a>
     <!-- Fim botão WhatsApp -->
