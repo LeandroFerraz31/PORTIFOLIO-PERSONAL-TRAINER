@@ -597,6 +597,59 @@
         <i class="fas fa-chevron-up"></i>
     </a>
     <!-- Fim botão Voltar ao Topo -->
+    <!-- Assistente IA - FAB -->
+    <button class="assistant-fab" aria-label="Assistente de Treinos" title="Assistente de Treinos">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- Assistente IA - Modal -->
+    <div class="assistant-modal" aria-hidden="true">
+        <div class="assistant-dialog" role="dialog" aria-modal="true" aria-label="Assistente de Treinos">
+            <button class="assistant-close" aria-label="Fechar">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="assistant-title">Assistente de Treinos</h3>
+            <div class="assistant-steps">
+                <div class="assistant-step" data-step="1">
+                    <h4>Qual seu objetivo?</h4>
+                    <div class="assistant-options">
+                        <label><input type="radio" name="goal" value="perda_gordura" checked> Perder gordura</label>
+                        <label><input type="radio" name="goal" value="ganho_massa"> Ganhar massa</label>
+                        <label><input type="radio" name="goal" value="condicionamento"> Condicionamento</label>
+                    </div>
+                </div>
+                <div class="assistant-step" data-step="2">
+                    <h4>Qual seu nível?</h4>
+                    <div class="assistant-options">
+                        <label><input type="radio" name="level" value="iniciante" checked> Iniciante</label>
+                        <label><input type="radio" name="level" value="intermediario"> Intermediário</label>
+                        <label><input type="radio" name="level" value="avancado"> Avançado</label>
+                    </div>
+                </div>
+                <div class="assistant-step" data-step="3">
+                    <h4>Equipamentos disponíveis</h4>
+                    <div class="assistant-options assistant-grid">
+                        <label><input type="checkbox" name="equip" value="sem_equipamento" checked> Sem equipamento</label>
+                        <label><input type="checkbox" name="equip" value="halteres"> Halteres</label>
+                        <label><input type="checkbox" name="equip" value="elastico"> Elásticos</label>
+                        <label><input type="checkbox" name="equip" value="banco"> Banco</label>
+                        <label><input type="checkbox" name="equip" value="barra"> Barra</label>
+                    </div>
+                </div>
+            </div>
+            <div class="assistant-actions">
+                <button class="btn btn-secondary assistant-prev" disabled>Voltar</button>
+                <button class="btn btn-primary assistant-next">Continuar</button>
+            </div>
+            <div class="assistant-result" hidden>
+                <h4>Seu plano sugerido (7 dias)</h4>
+                <div class="plan-container"></div>
+                <div class="assistant-share">
+                    <button class="btn btn-primary assistant-share-wa"><i class="fab fa-whatsapp"></i> Enviar por WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>

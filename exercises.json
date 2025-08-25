@@ -1,0 +1,12 @@
+[
+  {"id":"agachamento_corporal","nome":"Agachamento corporal","grupo":"pernas","equip":"sem_equipamento","nivel":"iniciante","video":"https://www.youtube.com/watch?v=aclHkVaku9U"},
+  {"id":"flexao_solo","nome":"Flexão no solo","grupo":"peito","equip":"sem_equipamento","nivel":"iniciante","video":"https://www.youtube.com/watch?v=IODxDxX7oi4"},
+  {"id":"remada_invertida","nome":"Remada invertida","grupo":"costas","equip":"barra","nivel":"iniciante","video":"https://www.youtube.com/watch?v=2w0XNo9bKjE"},
+  {"id":"remada_halter","nome":"Remada com halter","grupo":"costas","equip":"halteres","nivel":"intermediario","video":"https://www.youtube.com/watch?v=pYcpY20QaE8"},
+  {"id":"afundo","nome":"Afundo","grupo":"pernas","equip":"sem_equipamento","nivel":"intermediario","video":"https://www.youtube.com/watch?v=QOVaHwm-Q6U"},
+  {"id":"elevacao_lateral","nome":"Elevação lateral","grupo":"ombros","equip":"halteres","nivel":"intermediario","video":"https://www.youtube.com/watch?v=3VcKaXpzqRo"},
+  {"id":"supino_halter","nome":"Supino com halteres","grupo":"peito","equip":"halteres","nivel":"intermediario","video":"https://www.youtube.com/watch?v=VmB1G1K7v94"},
+  {"id":"rosca_direta","nome":"Rosca direta","grupo":"biceps","equip":"halteres","nivel":"iniciante","video":"https://www.youtube.com/watch?v=ykJmrZ5v0Oo"},
+  {"id":"triceps_banco","nome":"Tríceps no banco","grupo":"triceps","equip":"banco","nivel":"iniciante","video":"https://www.youtube.com/watch?v=0326dy_-CzM"},
+  {"id":"prancha","nome":"Prancha","grupo":"core","equip":"sem_equipamento","nivel":"iniciante","video":"https://www.youtube.com/watch?v=ASdvN_XEl_c"}
+]

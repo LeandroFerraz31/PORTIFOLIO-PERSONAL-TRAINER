@@ -151,6 +151,7 @@
             handleFAQ();
             handleContactForm();
             handleMobileMenu();
+            initAssistant();
             
             // Event listeners de scroll
             window.addEventListener('scroll', () => {
@@ -213,4 +214,165 @@
             document.querySelector('.hero .quote').textContent = `"${portfolioData.quote}"`;
             
             // Atualizar outras informações conforme necessário
+        }
+
+        // ===============================
+        // ASSISTENTE DE TREINOS (FRONT-ONLY)
+        // ===============================
+        function initAssistant() {
+            const fab = document.querySelector('.assistant-fab');
+            const modal = document.querySelector('.assistant-modal');
+            const dialog = document.querySelector('.assistant-dialog');
+            const btnClose = document.querySelector('.assistant-close');
+            const btnPrev = document.querySelector('.assistant-prev');
+            const btnNext = document.querySelector('.assistant-next');
+            const result = document.querySelector('.assistant-result');
+            const planContainer = document.querySelector('.plan-container');
+            const shareWA = document.querySelector('.assistant-share-wa');
+
+            if (!fab || !modal) return;
+
+            let step = 1;
+            const totalSteps = 3;
+            const answers = { goal: 'perda_gordura', level: 'iniciante', equip: ['sem_equipamento'] };
+
+            function openModal() {
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+                step = 1;
+                updateStepUI();
+                result.hidden = true;
+            }
+            function closeModal() {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+            function updateStepUI() {
+                btnPrev.disabled = step === 1;
+                btnNext.textContent = step === totalSteps ? 'Gerar plano' : 'Continuar';
+                document.querySelectorAll('.assistant-step').forEach(s => {
+                    s.style.display = s.getAttribute('data-step') === String(step) ? 'block' : 'none';
+                });
+            }
+
+            function readAnswers() {
+                const goal = document.querySelector('input[name="goal"]:checked')?.value;
+                const level = document.querySelector('input[name="level"]:checked')?.value;
+                const equip = Array.from(document.querySelectorAll('input[name="equip"]:checked')).map(i => i.value);
+                if (goal) answers.goal = goal;
+                if (level) answers.level = level;
+                answers.equip = equip.length ? equip : ['sem_equipamento'];
+            }
+
+            async function loadExercises() {
+                const res = await fetch('exercises.json', { cache: 'no-store' });
+                if (!res.ok) throw new Error('Falha ao carregar exercícios');
+                return res.json();
+            }
+
+            function pickByGoal(exercises, goal) {
+                const groupsByGoal = {
+                    perda_gordura: ['pernas', 'peito', 'costas', 'ombros', 'core'],
+                    ganho_massa: ['peito', 'costas', 'pernas', 'ombros', 'biceps', 'triceps', 'core'],
+                    condicionamento: ['pernas', 'core', 'peito', 'costas', 'ombros']
+                };
+                const order = groupsByGoal[goal] || groupsByGoal.condicionamento;
+                const byGroup = Object.fromEntries(order.map(g => [g, []]));
+                exercises.forEach(ex => {
+                    if (byGroup[ex.grupo]) byGroup[ex.grupo].push(ex);
+                });
+                return { order, byGroup };
+            }
+
+            function filterByLevelAndEquip(exercises, level, equip) {
+                return exercises.filter(ex => (ex.nivel === level || level === 'iniciante') && (equip.includes(ex.equip) || ex.equip === 'sem_equipamento'));
+            }
+
+            function buildWeekPlan(exercises, goal) {
+                const { order, byGroup } = pickByGoal(exercises, goal);
+                const days = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+                const plan = days.map((day, idx) => ({ day, items: [] }));
+
+                let cursor = 0;
+                for (let i = 0; i < plan.length; i++) {
+                    const group = order[cursor % order.length];
+                    const list = byGroup[group] || [];
+                    const picks = list.slice(0, 3);
+                    plan[i].items = picks.map(ex => ({
+                        id: ex.id,
+                        nome: ex.nome,
+                        grupo: ex.grupo,
+                        prescricao: goal === 'ganho_massa' ? '4x8-12' : goal === 'perda_gordura' ? '3x12-15' : '3x10-12',
+                        video: ex.video
+                    }));
+                    cursor++;
+                }
+                return plan;
+            }
+
+            function renderPlan(plan) {
+                planContainer.innerHTML = '';
+                plan.forEach(day => {
+                    const div = document.createElement('div');
+                    div.className = 'plan-day';
+                    const items = day.items.map(it => `
+                        <div class="exercise-item">
+                            <div>
+                                <div>${it.nome}</div>
+                                <div class="exercise-meta">${it.grupo} • ${it.prescricao}</div>
+                            </div>
+                            <div class="exercise-links">
+                                <a href="${it.video}" target="_blank" rel="noopener noreferrer">Vídeo</a>
+                            </div>
+                        </div>
+                    `).join('');
+                    div.innerHTML = `<h5>${day.day}</h5>${items}`;
+                    planContainer.appendChild(div);
+                });
+            }
+
+            function sharePlanWhatsApp(plan) {
+                const header = '*Plano semanal sugerido*%0A';
+                const lines = plan.map(d => {
+                    const ex = d.items.map(i => `- ${i.nome} (${i.prescricao})`).join('%0A');
+                    return `*${d.day}*%0A${ex}`;
+                }).join('%0A%0A');
+                const text = header + lines;
+                const number = '5551983012611';
+                const url = `https://wa.me/${number}?text=${text}`;
+                window.open(url, '_blank', 'noopener');
+            }
+
+            fab.addEventListener('click', openModal);
+            btnClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+            btnPrev.addEventListener('click', () => {
+                if (step > 1) { step--; updateStepUI(); }
+            });
+            btnNext.addEventListener('click', async () => {
+                if (step < totalSteps) {
+                    readAnswers();
+                    step++;
+                    updateStepUI();
+                    return;
+                }
+                // gerar plano
+                try {
+                    readAnswers();
+                    btnNext.disabled = true;
+                    btnNext.textContent = 'Gerando...';
+                    const all = await loadExercises();
+                    const filtered = filterByLevelAndEquip(all, answers.level, answers.equip);
+                    const plan = buildWeekPlan(filtered, answers.goal);
+                    renderPlan(plan);
+                    result.hidden = false;
+                    shareWA.onclick = () => sharePlanWhatsApp(plan);
+                } catch (err) {
+                    alert('Não foi possível gerar o plano agora. Tente novamente.');
+                } finally {
+                    btnNext.disabled = false;
+                    btnNext.textContent = 'Gerar plano';
+                }
+            });
         }
