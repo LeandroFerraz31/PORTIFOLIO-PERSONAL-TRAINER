@@ -226,9 +226,12 @@
             const btnClose = document.querySelector('.assistant-close');
             const btnPrev = document.querySelector('.assistant-prev');
             const btnNext = document.querySelector('.assistant-next');
+            const stepsContainer = document.querySelector('.assistant-steps');
+            const actionsContainer = document.querySelector('.assistant-actions');
             const result = document.querySelector('.assistant-result');
             const planContainer = document.querySelector('.plan-container');
             const shareWA = document.querySelector('.assistant-share-wa');
+            const backToSteps = document.querySelector('.assistant-back-to-steps');
 
             if (!fab || !modal) return;
 
@@ -239,9 +242,14 @@
             function openModal() {
                 modal.classList.add('active');
                 modal.setAttribute('aria-hidden', 'false');
-                step = 1;
-                updateStepUI();
-                result.hidden = true;
+                if (result.hidden) {
+                    step = 1;
+                    updateStepUI();
+                    setResultOnlyView(false);
+                } else {
+                    // Já existe plano: mostrar somente o resultado
+                    setResultOnlyView(true);
+                }
             }
             function closeModal() {
                 modal.classList.remove('active');
@@ -257,6 +265,17 @@
                 document.querySelectorAll('.assistant-step').forEach(s => {
                     s.style.display = s.getAttribute('data-step') === String(step) ? 'block' : 'none';
                 });
+            }
+
+            function setResultOnlyView(enabled) {
+                if (enabled) {
+                    if (stepsContainer) stepsContainer.style.display = 'none';
+                    if (actionsContainer) actionsContainer.style.display = 'none';
+                    result.hidden = false;
+                } else {
+                    if (stepsContainer) stepsContainer.style.display = '';
+                    if (actionsContainer) actionsContainer.style.display = '';
+                }
             }
 
             function readAnswers() {
@@ -350,6 +369,14 @@
             fab.addEventListener('click', openModal);
             btnClose.addEventListener('click', closeModal);
             modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            if (backToSteps) {
+                backToSteps.addEventListener('click', () => {
+                    setResultOnlyView(false);
+                    // volta para etapa de equipamentos
+                    step = 3;
+                    updateStepUI();
+                });
+            }
 
             btnPrev.addEventListener('click', () => {
                 if (step > 1) { step--; updateStepUI(); }
@@ -363,7 +390,7 @@
                     const filtered = filterByLevelAndEquip(all, answers.level, answers.equip);
                     const plan = buildWeekPlan(filtered, answers.goal);
                     renderPlan(plan);
-                    result.hidden = false;
+                    setResultOnlyView(true);
                     shareWA.onclick = () => sharePlanWhatsApp(plan);
                 } catch (err) {
                     alert('Não foi possível gerar o plano agora. Tente novamente.');
