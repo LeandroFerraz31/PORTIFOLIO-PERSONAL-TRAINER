@@ -285,7 +285,7 @@
             }
 
             function filterByLevelAndEquip(exercises, level, equip) {
-                return exercises.filter(ex => (ex.nivel === level || level === 'iniciante') && (equip.includes(ex.equip) || ex.equip === 'sem_equipamento'));
+                return exercises.filter(ex => (ex.nivel === level || level === 'iniciante') && (equip.includes(ex.equip)));
             }
 
             function buildWeekPlan(exercises, goal) {
@@ -375,4 +375,28 @@
                     btnNext.textContent = 'Gerar plano';
                 }
             });
+
+            // Atualização dinâmica da prévia de exercícios por equipamento
+            const previewList = document.querySelector('.assistant-preview-list');
+            async function updatePreview() {
+                if (!previewList) return;
+                readAnswers();
+                try {
+                    const all = await loadExercises();
+                    const filtered = filterByLevelAndEquip(all, answers.level, answers.equip);
+                    // Remover duplicados por nome
+                    const map = new Map();
+                    filtered.forEach(ex => { if (!map.has(ex.nome)) map.set(ex.nome, ex); });
+                    const uniques = Array.from(map.values()).slice(0, 24);
+                    previewList.innerHTML = uniques.map(ex => `<span class="assistant-preview-pill" title="${ex.nome}">${ex.nome}</span>`).join('');
+                } catch (_) {
+                    previewList.innerHTML = '<span class="assistant-preview-pill">Não foi possível carregar</span>';
+                }
+            }
+            // Ouvir mudanças em qualquer checkbox de equipamento e também em nível
+            document.querySelectorAll('input[name="equip"], input[name="level"]').forEach(input => {
+                input.addEventListener('change', updatePreview);
+            });
+            // Carregar prévia inicial quando abrir
+            setTimeout(updatePreview, 0);
         }
