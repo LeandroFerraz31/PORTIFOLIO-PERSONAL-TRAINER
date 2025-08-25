@@ -429,14 +429,16 @@
             }
             // Ouvir mudanças em qualquer checkbox de equipamento e também em nível
             document.querySelectorAll('input[name="equip"], input[name="level"]').forEach(input => {
-                input.addEventListener('change', async () => {
+                input.addEventListener('change', async (e) => {
+                    console.log('Mudança detectada:', e.target.name, e.target.value, 'Plano atualizado automaticamente? NÃO');
                     await updatePreview();
-                    // Não atualiza o plano automaticamente - só quando clicar em "Atualizar plano"
+                    // NÃO atualiza o plano automaticamente - só quando clicar em "Atualizar plano"
                 });
             });
             document.querySelectorAll('input[name="goal"]').forEach(input => {
-                input.addEventListener('change', async () => {
-                    // Não atualiza o plano automaticamente - só quando clicar em "Atualizar plano"
+                input.addEventListener('change', async (e) => {
+                    console.log('Mudança de objetivo detectada:', e.target.value, 'Plano atualizado automaticamente? NÃO');
+                    // NÃO atualiza o plano automaticamente - só quando clicar em "Atualizar plano"
                 });
             });
             // Carregar prévia inicial quando abrir
