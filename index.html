@@ -5,7 +5,17 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Personal Trainer</title>
+    <title>Fulano de Tal | Personal Trainer</title>
+    <meta name="description" content="Personal Trainer em São Paulo: treinos personalizados, consultoria online, avaliação física e resultados reais. Agende uma avaliação gratuita." />
+    <meta property="og:title" content="Fulano de Tal | Personal Trainer" />
+    <meta property="og:description" content="Treinos personalizados e metodologia focada em resultados. Consulte serviços, depoimentos e resultados de alunos." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8F%8B%EF%B8%8F%3C/text%3E%3C/svg%3E" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
@@ -21,7 +31,7 @@
         <div class="container">
             <nav>
                 <a class="logo" href="#">Personal Trainer </a>
-                <ul class="nav-links">
+                <ul class="nav-links" id="main-nav">
                     <li><a href="#home">Início</a></li>
                     <li><a href="#about">Sobre</a></li>
                     <li><a href="#services">Serviços</a></li>
@@ -29,7 +39,7 @@
                     <li><a href="#methodology">Metodologia</a></li>
                     <li><a href="#contact">Contato</a></li>
                 </ul>
-                <div class="mobile-menu">
+                <div class="mobile-menu" aria-label="Abrir menu" aria-controls="main-nav" aria-expanded="false" role="button">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -85,7 +95,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img alt="Fulano de Tal - Personal Trainer"
+                    <img alt="Fulano de Tal - Personal Trainer" loading="lazy"
                         src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80" />
                 </div>
             </div>
@@ -152,9 +162,9 @@
             <div class="results-grid">
                 <div class="result-card animate-on-scroll">
                     <div class="result-images">
-                        <img alt="Antes - Cliente 1"
+                        <img alt="Antes - Cliente 1" loading="lazy" width="400" height="250"
                             src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
-                        <img alt="Depois - Cliente 1"
+                        <img alt="Depois - Cliente 1" loading="lazy" width="400" height="250"
                             src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
                     </div>
                     <div class="result-info">
@@ -179,9 +189,9 @@
                 </div>
                 <div class="result-card animate-on-scroll">
                     <div class="result-images">
-                        <img alt="Antes - Cliente 2"
+                        <img alt="Antes - Cliente 2" loading="lazy" width="400" height="250"
                             src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
-                        <img alt="Depois - Cliente 2"
+                        <img alt="Depois - Cliente 2" loading="lazy" width="400" height="250"
                             src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
                     </div>
                     <div class="result-info">
@@ -206,9 +216,9 @@
                 </div>
                 <div class="result-card animate-on-scroll">
                     <div class="result-images">
-                        <img alt="Antes - Cliente 3"
+                        <img alt="Antes - Cliente 3" loading="lazy" width="400" height="250"
                             src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
-                        <img alt="Depois - Cliente 3"
+                        <img alt="Depois - Cliente 3" loading="lazy" width="400" height="250"
                             src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
                     </div>
                     <div class="result-info">
@@ -282,42 +292,42 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item animate-on-scroll">
-                    <img alt="Treino funcional"
+                    <img alt="Treino funcional" loading="lazy" width="600" height="600"
                         src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=600&amp;q=80" />
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item animate-on-scroll">
-                    <img alt="Musculação"
+                    <img alt="Musculação" loading="lazy" width="600" height="600"
                         src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=600&amp;q=80" />
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item animate-on-scroll">
-                    <img alt="Treinamento ao ar livre"
+                    <img alt="Treinamento ao ar livre" loading="lazy" width="600" height="600"
                         src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=600&amp;q=80" />
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item animate-on-scroll">
-                    <img alt="Treino em grupo"
+                    <img alt="Treino em grupo" loading="lazy" width="600" height="600"
                         src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=600&amp;q=80" />
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item animate-on-scroll">
-                    <img alt="Cardio"
+                    <img alt="Cardio" loading="lazy" width="600" height="600"
                         src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=600&amp;q=80" />
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item animate-on-scroll">
-                    <img alt="Alongamento"
+                    <img alt="Alongamento" loading="lazy" width="600" height="600"
                         src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=600&amp;q=80" />
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
@@ -341,7 +351,7 @@
                         muito motivador. Com ele consegui superar meus limites e alcançar resultados que nunca imaginei
                         possíveis.</p>
                     <div class="testimonial-author">
-                        <img alt="Cliente"
+                        <img alt="Cliente" loading="lazy" width="100" height="100"
                             src="https://images.unsplash.com/photo-1494790108755-2616b332c8c9?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=100&amp;q=80" />
                         <div class="author-info">
                             <h4>Carla Mendes</h4>
@@ -354,7 +364,7 @@
                         obrigação, agora é parte essencial do meu dia. Metodologia perfeita e resultados surpreendentes!
                     </p>
                     <div class="testimonial-author">
-                        <img alt="Cliente"
+                        <img alt="Cliente" loading="lazy" width="100" height="100"
                             src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=100&amp;q=80" />
                         <div class="author-info">
                             <h4>Pedro Oliveira</h4>
@@ -367,7 +377,7 @@
                         os treinos às minhas necessidades. Recomendo de olhos fechados para quem busca resultados reais!
                     </p>
                     <div class="testimonial-author">
-                        <img alt="Cliente"
+                        <img alt="Cliente" loading="lazy" width="100" height="100"
                             src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=100&amp;q=80" />
                         <div class="author-info">
                             <h4>Fernanda Lima</h4>
@@ -520,10 +530,10 @@
                     <p>Personal Trainer dedicado à transformação de vidas através do exercício físico. Mais de 8 anos de
                         experiência e centenas de vidas transformadas.</p>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/" target="_blank">
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://wa.me/5511999999999" target="_blank">
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                         <a href="mailto:contato@fulanodetal.com">
@@ -568,7 +578,7 @@
          JAVASCRIPT
          =============================== -->
     <!-- Botão flutuante WhatsApp -->
-    <a aria-label="WhatsApp" class="whatsapp-float" href="https://wa.me/5511999999999" target="_blank">
+    <a aria-label="WhatsApp" class="whatsapp-float" href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-whatsapp"></i>
     </a>
     <!-- Fim botão WhatsApp -->
@@ -577,11 +587,12 @@
         <i class="fas fa-chevron-up"></i>
     </a>
     <!-- Fim botão Voltar ao Topo -->
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-<script src="script.js"></script>
-
-</html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <script src="script.js"></script>
+    
+    </body>
+    
+    </html>

@@ -40,8 +40,9 @@
                     const targetElement = document.getElementById(targetId);
                     
                     if (targetElement) {
-                        const headerHeight = 80;
-                        const targetPosition = targetElement.offsetTop - headerHeight;
+                        const header = document.getElementById('header');
+                        const headerHeight = header ? header.offsetHeight : 0;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
                         
                         window.scrollTo({
                             top: targetPosition,
@@ -105,6 +106,8 @@
             mobileMenu.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
                 mobileMenu.classList.toggle('active');
+                const expanded = mobileMenu.getAttribute('aria-expanded') === 'true';
+                mobileMenu.setAttribute('aria-expanded', String(!expanded));
             });
         }
 

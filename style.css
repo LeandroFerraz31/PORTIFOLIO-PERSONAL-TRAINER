@@ -850,6 +850,9 @@
            RESPONSIVIDADE
            =============================== */
         @media (max-width: 768px) {
+            .hero {
+                background-attachment: scroll;
+            }
             .nav-links {
                 display: none;
             }
