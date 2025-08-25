@@ -249,7 +249,11 @@
             }
             function updateStepUI() {
                 btnPrev.disabled = step === 1;
-                btnNext.textContent = step === totalSteps ? 'Gerar plano' : 'Continuar';
+                if (!result.hidden) {
+                    btnNext.textContent = step === totalSteps ? 'Atualizar plano' : 'Continuar';
+                } else {
+                    btnNext.textContent = step === totalSteps ? 'Gerar plano' : 'Continuar';
+                }
                 document.querySelectorAll('.assistant-step').forEach(s => {
                     s.style.display = s.getAttribute('data-step') === String(step) ? 'block' : 'none';
                 });
@@ -350,18 +354,11 @@
             btnPrev.addEventListener('click', () => {
                 if (step > 1) { step--; updateStepUI(); }
             });
-            btnNext.addEventListener('click', async () => {
-                if (step < totalSteps) {
-                    readAnswers();
-                    step++;
-                    updateStepUI();
-                    return;
-                }
-                // gerar plano
+            async function generateAndRenderPlan() {
                 try {
                     readAnswers();
                     btnNext.disabled = true;
-                    btnNext.textContent = 'Gerando...';
+                    btnNext.textContent = result.hidden ? 'Gerando...' : 'Atualizando...';
                     const all = await loadExercises();
                     const filtered = filterByLevelAndEquip(all, answers.level, answers.equip);
                     const plan = buildWeekPlan(filtered, answers.goal);
@@ -372,8 +369,18 @@
                     alert('Não foi possível gerar o plano agora. Tente novamente.');
                 } finally {
                     btnNext.disabled = false;
-                    btnNext.textContent = 'Gerar plano';
+                    btnNext.textContent = 'Atualizar plano';
                 }
+            }
+
+            btnNext.addEventListener('click', async () => {
+                if (step < totalSteps) {
+                    readAnswers();
+                    step++;
+                    updateStepUI();
+                    return;
+                }
+                await generateAndRenderPlan();
             });
 
             // Atualização dinâmica da prévia de exercícios por equipamento
@@ -395,7 +402,19 @@
             }
             // Ouvir mudanças em qualquer checkbox de equipamento e também em nível
             document.querySelectorAll('input[name="equip"], input[name="level"]').forEach(input => {
-                input.addEventListener('change', updatePreview);
+                input.addEventListener('change', async () => {
+                    await updatePreview();
+                    if (!result.hidden) {
+                        await generateAndRenderPlan();
+                    }
+                });
+            });
+            document.querySelectorAll('input[name="goal"]').forEach(input => {
+                input.addEventListener('change', async () => {
+                    if (!result.hidden) {
+                        await generateAndRenderPlan();
+                    }
+                });
             });
             // Carregar prévia inicial quando abrir
             setTimeout(updatePreview, 0);
